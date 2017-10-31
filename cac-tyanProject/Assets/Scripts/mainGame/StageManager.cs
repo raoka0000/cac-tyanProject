@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class StageManager : SingletonMonoBehaviour<StageManager> {
 	public string loadJsonName = "json/Stage1";//jsonファイルの名前をいれる.
+	[System.NonSerialized]
 	public StageScriptData stageScriptData;
 
-	public LAppModelProxy _modelProxy;
+	private LAppModelProxy _modelProxy;
 	public LAppModelProxy modelProxy{
 		get{
 			if (_modelProxy == null) {
@@ -19,6 +20,7 @@ public class StageManager : SingletonMonoBehaviour<StageManager> {
 
 	private AudioSource live2ModelAudioSource;
 
+	[System.NonSerialized]
 	public ScriptNode nextScriptNode;
 
 
