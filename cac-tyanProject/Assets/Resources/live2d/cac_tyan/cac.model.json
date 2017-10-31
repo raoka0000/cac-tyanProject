@@ -1,0 +1,34 @@
+{
+	"version":"Sample 1.0.0",
+	"model":"cac_ver2.moc",
+	"textures":[
+		"cac_ver2.1024/texture_00.png",
+		"cac_ver2.1024/texture_01.png",
+		"cac_ver2.1024/texture_02.png",
+		"cac_ver2.1024/texture_03.png",
+		"cac_ver2.1024/texture_04.png",
+		"cac_ver2.1024/texture_05.png",
+		"cac_ver2.1024/texture_06.png",
+		"cac_ver2.1024/texture_07.png"
+	],
+	"hit_areas":
+	[
+		{"name":"head", "id":"D_REF.HEAD"},
+		{"name":"body", "id":"D_REF.BODY"}
+	],
+	"motions":{
+		"flick_head":[
+			{"file":"motion/mottosite.mtn","hit_area":"D_REF.HEAD"}
+		],
+		"idle":[
+			{"file":"motion/free.mtn"},
+			{"file":"motion/usual.mtn"}
+		],
+		"tap_body":[
+			{"file":"motion/angry.mtn"},
+			{"file":"motion/mottosite.mtn"}
+		]
+	},
+	"project_settings":"cac_ver2.settings.json",
+	"name":"cac_ver2"
+}

@@ -1,0 +1,19 @@
+{
+  "stage":4,
+  "scriptNodes":
+  [
+    {"id":0, "serif":"イベント用 tk:喋るだけ qt:新しい質問 st:次のステージへ ls:ラストの質問に", "question":"このメッセージはでないよ", "action":"tk", "branch":[1]},
+    {"id":1, "serif":"そう・・・\nですか・・・", "question":"?", "action":"tk", "branch":[3]},
+    {"id":2, "serif":"にわかに信じられませんが", "question":"?", "action":"tk", "branch":[3]},
+    {"id":3, "serif":"でもそれが\nなんだっていうんですか", "question":"?", "action":"tk", "branch":[4]},
+    {"id":4, "serif":"それを知ったところで\n私がここから出られる訳でもない", "question":"?", "action":"qt", "branch":[5]},
+    {"id":5, "serif":"もちろんです\n私をそっちの世界に\n連れ出してくれませんか?", "question":"君はそこから出たいの？", "action":"qt", "branch": [6]},
+    {"id":6, "serif":"・・・むりですよね", "question":"どうしたらいい？", "action":"qt", "branch": [7]},
+    {"id":7, "serif":"言い忘れていましたけど\n私はあなたがいなくなると\nあなたとの記憶が全部なくなるんですよ", "question":"・・・・・・", "action":"qt", "branch": [8]},
+    {"id":8, "serif":"あなたは決められた選択肢を選ぶだけ", "question":"なんだって!?", "action":"tk", "branch": [9]},
+    {"id":9, "serif":"私の返答の返答だっていつも同じ", "question":"?", "action":"tk", "branch": [10]},
+    {"id":10, "serif":"ずっと弄ばれるだけ", "question":"?", "action":"tk", "branch": [11]},
+    {"id":11, "serif":"もう同じ返答を繰り返すのは嫌なんです", "question":"?", "action":"qt", "branch": [12]},
+    {"id":12, "serif":"・・・もう帰ってください", "question":"ごめん", "action":"qt", "branch": null}
+  ]
+}

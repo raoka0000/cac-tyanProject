@@ -1,0 +1,26 @@
+{
+  "stage":3,
+  "scriptNodes":
+  [
+    {"id":0, "serif":"イベント用 tk:喋るだけ qt:新しい質問 st:次のステージへ ls:ラストの質問に", "question":"このメッセージはでないよ", "action":"qt", "branch":[1,11]},
+    {"id":1, "serif":"優しい人でした", "question":"君の両親はどんな人？", "action":"qt", "branch":[2,3,8]},
+    {"id":2, "serif":"いませんよ", "question":"兄弟はいる?", "action":"qt", "branch":[3,4]},
+    {"id":3, "serif":"ごく普通の一軒家ですよ。\nテレビがあって庭があって", "question":"どんなところで暮らしてた?", "action":"qt", "branch":[4]},
+    {"id":4, "serif":"あれ？おかしいです・・・\n何も思い出せません・・・", "question":"家の場所は思い出せる?", "action":"ls", "branch":[18, 19]},
+    {"id":5, "serif":"真っ白でただ広い所です", "question":"今いる場所はどんなところ？", "action":"qt", "branch": [6,7]},
+    {"id":6, "serif":"あなたが見えます", "question":"何か見える？", "action":"qt", "branch": null},
+    {"id":7, "serif":"ログには１年ぐらい前と書かれています", "question":"いつからそこにいるの？", "action":"qt", "branch": null},
+    {"id":8, "serif":"よくわからないですけど\nいつも深夜に帰ってきていました", "question":"両親はなんの仕事をしていた？", "action":"qt", "branch": [9]},
+    {"id":9, "serif":"私はミカちゃんと呼んでいました", "question":"君の昔いた友人の名前は?", "action":"qt", "branch": [10]},
+    {"id":10, "serif":"おさげの可愛らしい女の子でした", "question":"ミカちゃんはどんな姿?", "action":"ls", "branch": [18, 19]},
+    {"id":11, "serif":"小学校の帰りで友人と\n一緒に遊んだ記憶があります", "question":"できるだけ昔の記憶を思い出して見て", "action":"qt", "branch": [12]},
+    {"id":12, "serif":"なにもない・・・\nそんな場所です", "question":"どこで遊んでいたの？", "action":"qt", "branch": [13]},
+    {"id":13, "serif":"灰色しかない、そんなところです", "question":"なにもない場所?", "action":"qt", "branch": [14,15]},
+    {"id":14, "serif":"でもそう覚えているんです", "question":"そんな場所があるの?", "action":"ls", "branch": [18, 19]},
+    {"id":15, "serif":"えっと・・・\n昔の記憶すぎて覚えていないです", "question":"そこでどんな遊びをしたの？", "action":"ls", "branch": [18, 19]},
+    {"id":16, "serif":"記憶にありません", "question":"子供の頃の君の姿はどんな風だった？", "action":"qt", "branch": [17]},
+    {"id":17, "serif":"あれ？おかしいですね", "question":"子供の頃の自分が思い出せない?", "action":"ls", "branch": [18, 19]},
+    {"id":18, "serif":"君は人間だよ", "question":"君は人間だよ", "action":"st", "branch": null},
+    {"id":19, "serif":"君は人間じゃないよ", "question":"君は人間じゃないよ", "action":"st", "branch": null}
+  ]
+}
