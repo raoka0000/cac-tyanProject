@@ -24,10 +24,10 @@ Material:
     m_Floats:
     - _NoiseX: 0
     - _RGBNoise: 0
-    - _ScanLineSpeed: 10
-    - _ScanLineTail: 2
+    - _ScanLineSpeed: -10
+    - _ScanLineTail: 0
     - _SinNoiseOffset: 0
-    - _SinNoiseScale: 0
+    - _SinNoiseScale: 0.49
     - _SinNoiseWidth: 0
     m_Colors:
     - _Offset: {r: 0, g: 0, b: 0, a: 0}

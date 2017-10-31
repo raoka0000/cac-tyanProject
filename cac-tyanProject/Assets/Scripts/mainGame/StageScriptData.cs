@@ -6,7 +6,7 @@ using System.Collections.Generic;
 //jsonファイルのデータ型を作る.
 [Serializable]
 public class StageScriptData{
-	public int stage;
+	public string stage;
 	public ScriptNode[] scriptNodes;
 }
 

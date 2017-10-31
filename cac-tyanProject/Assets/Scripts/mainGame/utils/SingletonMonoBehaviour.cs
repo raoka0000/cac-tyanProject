@@ -15,7 +15,6 @@ public class SingletonMonoBehaviour<T> : MonoBehaviour where T : MonoBehaviour{
 					_instance = new GameObject (self).AddComponent<T> ();
 				}
 			}
-
 			return _instance;
 		}
 	}

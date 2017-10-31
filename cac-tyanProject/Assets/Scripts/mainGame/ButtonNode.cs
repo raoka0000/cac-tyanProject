@@ -4,10 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 
-
+[RequireComponent(typeof (Image))]
 public class ButtonNode : MonoBehaviour {
 
-	public int stage = 1;
+	public string stage = "";
+	public bool deathFlg = false;
 	private ScriptNode _scriptNode;
 	public ScriptNode scriptNode{
 		get { return _scriptNode; }
@@ -44,12 +45,7 @@ public class ButtonNode : MonoBehaviour {
 		rectTransform = GetComponent<RectTransform> ();
 	}
 	
-	// Update is called once per frame
-	void Update () {
-
-	}
-
-	public void Init(int stage, ScriptNode node){
+	public void Init(string stage, ScriptNode node){
 		this.stage = stage;
 		this.scriptNode = node;
 		//this.isNew = true;
@@ -70,7 +66,14 @@ public class ButtonNode : MonoBehaviour {
 	}
 
 	public void OnClick(){
-		UiController.instance.Selected (this);
-		AudioManager.instance.PlayQuestionButtonSound ();
+		StageView.instance.Selected (this);
+	}
+
+	public void Hidden(){
+		isNew = false;
+		if (deathFlg) {
+			Debug.Log ("aaa");
+			Destroy (this.gameObject);
+		}
 	}
 }

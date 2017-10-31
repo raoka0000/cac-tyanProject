@@ -342,8 +342,7 @@ public class LAppModel :L2DBaseModel
      * 音声付きならそれも再生。
      * フェードイン、フェードアウトの情報があればここで設定。なければ初期値。
      */
-	public void StartMotion(string group, int no, int priority){StartMotion (group, no, priority, () => {});}
-	public void StartMotion(string group, int no, int priority, UnityAction callBack)
+	public void StartMotion(string group, int no, int priority, UnityAction callBack = null)
     {
         string motionName = modelSetting.GetMotionFile(group, no);
 
@@ -407,7 +406,7 @@ public class LAppModel :L2DBaseModel
             if (LAppDefine.DEBUG_LOG) Debug.Log("Start motion : " + motionName + "  voice : " + soundPath);
             StartVoice(acVoice);
             mainMotionManager.startMotionPrio(motion, priority);
-			callBack ();
+			if(callBack != null) callBack ();
         }
     }
 

@@ -1,5 +1,5 @@
 {
-  "stage":3,
+  "stage":"stage3",
   "scriptNodes":
   [
     {"id":0, "serif":"イベント用 tk:喋るだけ qt:新しい質問 st:次のステージへ ls:ラストの質問に", "question":"このメッセージはでないよ", "action":"qt", "branch":[1,11]},
