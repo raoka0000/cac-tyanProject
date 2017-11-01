@@ -130,28 +130,36 @@ public class StageView : SingletonMonoBehaviour<StageView> {
 	}
 
 
-
+	Sequence tmpSeq;
 	public void ShowMessage(string str){
+		tmpSeq.Kill ();
+		tmpSeq = DOTween.Sequence();
 		messageWindow.gameObject.SetActive (true);
 		var text = messageWindow.gameObject.GetComponentInChildren<Text>();
 		text.text = str;
-		DOTween.ToAlpha (
-			() => text.color, 
-			color => text.color = color,
-			1f,                                // 最終的なalpha値
-			MESSAGE_WINDOW_FADE_TIME
+		tmpSeq.Append (
+			DOTween.ToAlpha (
+				() => text.color, 
+				color => text.color = color,
+				1f,                                // 最終的なalpha値
+				MESSAGE_WINDOW_FADE_TIME
+			)
 		);
 	}
 
 	public void HideMessage(){
 		if (!messageWindow.gameObject.activeSelf) return;
 		var text = messageWindow.gameObject.GetComponentInChildren<Text>();
-		DOTween.ToAlpha (
-			() => text.color, 
-			color => text.color = color,
-			0f,                                // 最終的なalpha値
-			MESSAGE_WINDOW_FADE_TIME
-		).OnComplete (() => messageWindow.gameObject.SetActive (false));
+		tmpSeq.Kill ();
+		tmpSeq = DOTween.Sequence();
+		tmpSeq.Append (
+			DOTween.ToAlpha (
+				() => text.color, 
+				color => text.color = color,
+				0f,                                // 最終的なalpha値
+				MESSAGE_WINDOW_FADE_TIME
+			).OnComplete (() => messageWindow.gameObject.SetActive (false))
+		);
 	}
 
 	public void DoRest(){
@@ -221,13 +229,31 @@ public class StageView : SingletonMonoBehaviour<StageView> {
 
 		seq.Append (
 			DOTween.To (
+				() => crt.SinNoiseWidth,
+				(num) => crt.SinNoiseWidth = num,
+				5.55f,
+				1.5f
+			).SetEase (Ease.InOutBounce)
+		);
+		seq.Join (
+			DOTween.To (
 				() => crt.ScanLineTail,
 				(num) => crt.ScanLineTail = num,
 				0f,
 				3.5f
 			).SetEase (Ease.InOutBounce)
 		).AppendInterval(1.0f)
-		.OnKill(()=>SceneManager.LoadScene ("refection"));
+			.OnKill(()=>SceneManager.LoadScene ("refection"));
+		
+		seq.Join (
+			DOTween.To (
+				() => crt.SinNoiseWidth,
+				(num) => crt.SinNoiseWidth = num,
+				0f,
+				1.5f
+			).SetEase (Ease.InOutBounce)
+		);
+
 
 
 	}

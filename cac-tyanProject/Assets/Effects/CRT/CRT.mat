@@ -27,7 +27,7 @@ Material:
     - _ScanLineSpeed: 10
     - _ScanLineTail: 0
     - _SinNoiseOffset: 0
-    - _SinNoiseScale: 0
+    - _SinNoiseScale: 1
     - _SinNoiseWidth: 0
     m_Colors:
-    - _Offset: {r: 8.503117, g: -8.406109, b: 0, a: 0}
+    - _Offset: {r: -0.54253197, g: 7.836237, b: 0, a: 0}

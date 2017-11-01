@@ -173,7 +173,7 @@ public class StageController : SingletonMonoBehaviour<StageController> {
 		dummy.SetActive (true);
 		Time.timeScale = 0.001f;
 		AudioManager.instance.StopBGM ();
-		modelProxy.model.StopAllMotion ();
+		//modelProxy.model.StopAllMotion ();
 		StageView.instance.DoRest ();
 	}
 
