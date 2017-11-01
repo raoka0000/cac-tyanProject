@@ -182,6 +182,10 @@ public class LAppModel :L2DBaseModel
      */
     public void Update()
     {
+		if(isStop){
+			return;
+		}
+
         if ( ! isInitialized() || isUpdating())
         {
             return;
@@ -410,6 +414,13 @@ public class LAppModel :L2DBaseModel
         }
     }
 
+	//全てのモーションを停止させる.
+	private bool isStop = false;
+	public void StopAllMotion(){
+		mainMotionManager.stopAllMotions ();
+		isStop = true;
+	}
+
 
     /*
      * 音声とモーションの同時再生
@@ -528,6 +539,7 @@ public class LAppModel :L2DBaseModel
      * @param y	タップの座標 y
      * @return
      */
+	public string tapBodyMotionGroupName = LAppDefine.MOTION_GROUP_TAP_BODY;
     public bool TapEvent(float x, float y)
     {
         if (LAppDefine.DEBUG_LOG) Debug.Log("tapEvent view x:" + x + " y:" + y);
@@ -541,7 +553,7 @@ public class LAppModel :L2DBaseModel
         else if (HitTest(LAppDefine.HIT_AREA_BODY, x, y))
         {
             if (LAppDefine.DEBUG_LOG) Debug.Log("Tapped body");
-            StartRandomMotion(LAppDefine.MOTION_GROUP_TAP_BODY, LAppDefine.PRIORITY_NORMAL);
+			StartRandomMotion(tapBodyMotionGroupName, LAppDefine.PRIORITY_NORMAL);
         }
         return true;
     }

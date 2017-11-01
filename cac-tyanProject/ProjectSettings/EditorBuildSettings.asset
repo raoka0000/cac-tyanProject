@@ -7,7 +7,7 @@ EditorBuildSettings:
   m_Scenes:
   - enabled: 1
     path: Assets/Scene/main.unity
-    guid: 28f44307de23d4f7fbfac00924583bb9
+    guid: 781da57d4b40c4c5fb3b70b5d2804b7d
   - enabled: 1
-    path: Assets/Scene/Title.unity
-    guid: b371ff1922b50449484cab0a66429ab2
+    path: Assets/Scene/refection.unity
+    guid: 00000000000000000000000000000000

@@ -12,7 +12,7 @@ public class StageModel : SingletonMonoBehaviour<StageModel> {
 	}
 	public ScriptNode nextScriptNode{ get; set;}
 
-	[System.NonSerialized] 
+	[System.NonSerialized]
 	public Dictionary<string, List<ScriptNode>> endScriptNodes = new Dictionary<string, List<ScriptNode>>();
 
 	[System.NonSerialized]

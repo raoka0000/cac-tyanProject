@@ -15,6 +15,8 @@ public class ButtonNode : MonoBehaviour {
 		set { SetSerifNode (value); }
 	}
 
+	public GameObject newBatch;
+
 	private bool _isNew = true;
 	public bool isNew{
 		get { return _isNew; }
@@ -48,7 +50,7 @@ public class ButtonNode : MonoBehaviour {
 	public void Init(string stage, ScriptNode node){
 		this.stage = stage;
 		this.scriptNode = node;
-		//this.isNew = true;
+		this.isNew = true;
 	}
 
 	private void SetSerifNode(ScriptNode item){
@@ -58,11 +60,7 @@ public class ButtonNode : MonoBehaviour {
 	}
 
 	private void SetNewbadge(bool n){
-		if (n) {
-			image.color = new Color (0.8f, 1f, 1f, 1f);
-		} else {
-			image.color = Color.white;
-		}
+		newBatch.SetActive (n);
 	}
 
 	public void OnClick(){

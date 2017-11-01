@@ -15,10 +15,15 @@ public class StageController : SingletonMonoBehaviour<StageController> {
 	private readonly string   STAGE_SCRIPT_DATA_PATH = "json/";
 	private readonly string[] STAGE_SCRIPT_DATA_NAMES = {"Stage1","Stage2","Stage3","Stage4"};
 
-	private int state = 1<<0;
+	[System.NonSerialized]
+	public int state = 1<<0;
 
 	[SerializeField]
 	private int stageNumNow = 0;
+
+	[SerializeField]
+	private GameObject dummy;
+
 
 	[SerializeField]
 	private LAppModelProxy _modelProxy;
@@ -50,6 +55,9 @@ public class StageController : SingletonMonoBehaviour<StageController> {
 
 	/*ボタン*/
 	public void MainButton(){
+		if (BitUtil.Exist (state, (int)StateType.showRestButton)) {
+			return;
+		}
 		if (BitUtil.Exist (state, (int)StateType.idle)) {
 			StageView.instance.MoveLive2dModel (
 				() => {
@@ -149,6 +157,24 @@ public class StageController : SingletonMonoBehaviour<StageController> {
 			Camera.main.backgroundColor = Color.blue;
 			AudioManager.instance.PlayBGM("Y 05 黒");
 		}
+	}
+
+	public void showRestButton(bool flg){
+		if (flg) {
+			BitUtil.Add (ref state, (int)StateType.showRestButton);
+			modelProxy.model.tapBodyMotionGroupName = "";
+		} else {
+			BitUtil.Loss (ref state, (int)StateType.showRestButton);
+			modelProxy.model.tapBodyMotionGroupName = LAppDefine.MOTION_GROUP_TAP_BODY;
+		}
+	}
+
+	public void DoRest(){
+		dummy.SetActive (true);
+		Time.timeScale = 0.001f;
+		AudioManager.instance.StopBGM ();
+		modelProxy.model.StopAllMotion ();
+		StageView.instance.DoRest ();
 	}
 
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using DG.Tweening;
 
 
@@ -19,6 +20,8 @@ public class StageView : SingletonMonoBehaviour<StageView> {
 	public RectTransform messageWindow;
 	[SerializeField]
 	public RectTransform questionButton;
+	[SerializeField]
+	public RectTransform resetButton;
 
 	void Start () {
 		StageModel.instance.AddCurrentQuestionsListener     = AddButton;
@@ -34,7 +37,6 @@ public class StageView : SingletonMonoBehaviour<StageView> {
 
 		ButtonNode buttonNode = item.GetComponent<ButtonNode> ();
 		buttonNode.Init (StageModel.instance.stageScriptData.stage, node);
-		buttonNode.isNew = false;
 
 		buttons.Add (buttonNode);
 
@@ -152,6 +154,83 @@ public class StageView : SingletonMonoBehaviour<StageView> {
 		).OnComplete (() => messageWindow.gameObject.SetActive (false));
 	}
 
+	public void DoRest(){
+		foreach(ButtonNode bn in buttons){
+			bn.gameObject.SetActive (false);
+		}
+		MainButton.gameObject.SetActive (false);
+		resetButton.gameObject.SetActive (false);
+		GameObject camera = Camera.main.gameObject;
+		CRT crt = camera.GetComponent<CRT> ();
+		crt.enabled = true;
+		Vector2 vec = Vector2.up;
+		Vector2 vec2 = Vector2.one;
+		Sequence seq = DOTween.Sequence();
+		seq.timeScale = 1000.0f;
+		seq.Append (
+			DOVirtual.DelayedCall(0.8f,
+				()=> {
+					crt.Offset = new Vector2(Random.Range(-10.0f, 10.0f), Random.Range(-10.0f, 10.0f));
+				}
+			).SetLoops(5)
+		);
+		/*
+		seq.Join (
+			DOTween.To (
+				()=>crt.Offset.y,
+				(num)=>crt.Offset = vec*num ,
+				5f,
+				5f
+			).SetEase (Ease.InOutBounce)
+		);*/
+
+		seq.Append (
+			DOTween.To (
+				() => crt.NoiseX,
+				(num) => crt.NoiseX = num,
+				0.05f,
+				1.0f
+			).SetEase (Ease.InOutBounce)
+		);
+		seq.Append (
+			DOTween.To (
+				() => crt.NoiseX,
+				(num) => crt.NoiseX = num,
+				0f,
+				1.5f
+			).SetEase (Ease.InOutBounce)
+		);
+		seq.Join (
+			DOTween.To (
+				() => Time.timeScale,
+				(num) => Time.timeScale = num,
+				0.1f,
+				1.5f
+			).SetEase (Ease.InOutBounce)
+			.OnStepComplete(()=>{Time.timeScale = 1;})
+		);
+		seq.Join (
+			DOTween.To (
+				() => seq.timeScale,
+				(num) => seq.timeScale = num,
+				1f,
+				1.5f
+			).SetEase (Ease.InOutBounce)
+		);
+
+
+		seq.Append (
+			DOTween.To (
+				() => crt.ScanLineTail,
+				(num) => crt.ScanLineTail = num,
+				0f,
+				3.5f
+			).SetEase (Ease.InOutBounce)
+		).AppendInterval(1.0f)
+		.OnKill(()=>SceneManager.LoadScene ("refection"));
+
+
+	}
 
 
 }
