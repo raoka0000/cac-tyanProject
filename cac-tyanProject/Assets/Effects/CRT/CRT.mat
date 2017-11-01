@@ -30,4 +30,4 @@ Material:
     - _SinNoiseScale: 0
     - _SinNoiseWidth: 0
     m_Colors:
-    - _Offset: {r: -8.495102, g: 1.3406525, b: 0, a: 0}
+    - _Offset: {r: 8.503117, g: -8.406109, b: 0, a: 0}

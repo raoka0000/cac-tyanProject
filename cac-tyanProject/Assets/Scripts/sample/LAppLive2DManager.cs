@@ -28,6 +28,10 @@ public class LAppLive2DManager
         }
     }
 
+	public void Dispose(){
+		instance = null;
+	}
+
 	//  モデル表示用ゲームオブジェクト
     private List<LAppModelProxy> models;
     private bool touchMode2D;

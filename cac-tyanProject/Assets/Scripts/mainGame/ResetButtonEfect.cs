@@ -13,7 +13,7 @@ public class ResetButtonEfect : MonoBehaviour {
 	[SerializeField]
 	private RectTransform noButton;
 	[SerializeField]
-	private RectTransform TextBoard;
+	private RectTransform TextBoard; 
 	[SerializeField]
 	private FadeUI fade;
 
