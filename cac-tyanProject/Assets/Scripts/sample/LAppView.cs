@@ -57,9 +57,9 @@ public class LAppView
 		dragMgr = new L2DTargetPoint();
 		
 		Bounds bounds = model.GetBounds();
-		localP_LT = new Vector3(-(bounds.size.x/2), 0, (bounds.size.z/2)) ;
-		localP_RT = new Vector3( (bounds.size.x/2), 0, (bounds.size.z/2)) ;
-		localP_LB = new Vector3(-(bounds.size.x/2), 0,-(bounds.size.z/2)) ;
+		localP_LT = new Vector3(-(bounds.size.x/2), 0, (bounds.size.z/2));
+		localP_RT = new Vector3( (bounds.size.x/2), 0, (bounds.size.z/2));
+		localP_LB = new Vector3(-(bounds.size.x/2), 0,-(bounds.size.z/2));
 	}
 
 

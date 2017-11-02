@@ -29,6 +29,20 @@ public class StageView : SingletonMonoBehaviour<StageView> {
 		StageModel.instance.AllLossCurrentQuestionsListener = AllLossButton;
 	}
 
+	void Update(){
+		if(Input.GetMouseButtonDown(0)){ // Editor/マウス操作の場合は Input.GetMouseButton(0) にする
+			var pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+			pos.z = 0;
+			ParticleManager.instance.DoTapEffect(pos);
+		}
+		/*
+		if(Input.touchCount > 0){ // Editor/マウス操作の場合は Input.GetMouseButton(0) にする
+			var pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+			pos.z = 0;
+			ParticleManager.instance.DoTapEffect(pos);
+		}*/
+	}
+
 
 	//リスナー
 	private void AddButton(ScriptNode node){
@@ -74,7 +88,7 @@ public class StageView : SingletonMonoBehaviour<StageView> {
 		const float maxRad = Mathf.PI * 0.5f;
 		MainButton.DOAnchorPos (Vector2.zero, QUESTION_MOVE_TIME);
 		for(int i  = 0; i < buttons.Count; i++){
-			float theta = Mathf.Lerp (0, maxRad, ((float)i + 1.0f) / ((float)buttons.Count + 1) ) + (Mathf.PI * 1.75f) - 0.1f;
+			float theta = Mathf.Lerp (0, maxRad, ((float)i + 1.0f) / ((float)buttons.Count + 1) ) + (Mathf.PI * 1.75f) - 0.05f;
 			int id = buttons.Count - 1 - i;
 			buttons [id].rectTransform.localRotation = Quaternion.Euler(0, 0, theta * Mathf.Rad2Deg);
 			Sequence seq = DOTween.Sequence();

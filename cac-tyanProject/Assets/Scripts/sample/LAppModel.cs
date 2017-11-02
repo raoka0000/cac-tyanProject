@@ -234,16 +234,16 @@ public class LAppModel :L2DBaseModel
 
         // ドラッグによる変化
         // ドラッグによる顔の向きの調整
-        live2DModel.addToParamFloat(L2DStandardID.PARAM_ANGLE_X, dragX * 30, 1);// -30から30の値を加える
-        live2DModel.addToParamFloat(L2DStandardID.PARAM_ANGLE_Y, dragY * 30, 1);
-        live2DModel.addToParamFloat(L2DStandardID.PARAM_ANGLE_Z, (dragX * dragY) * -30, 1);
+        live2DModel.addToParamFloat(L2DStandardID.PARAM_ANGLE_X, dragX * 2, 1);// -30から30の値を加える
+        live2DModel.addToParamFloat(L2DStandardID.PARAM_ANGLE_Y, dragY * 2, 1);
+        live2DModel.addToParamFloat(L2DStandardID.PARAM_ANGLE_Z, (dragX * dragY) * -2, 1);
 
         // ドラッグによる体の向きの調整
-        live2DModel.addToParamFloat(L2DStandardID.PARAM_BODY_ANGLE_X, dragX, 10);// -10から10の値を加える
+        live2DModel.addToParamFloat(L2DStandardID.PARAM_BODY_ANGLE_X, dragX, 2);// -10から10の値を加える
 
         // ドラッグによる目の向きの調整
-        live2DModel.addToParamFloat(L2DStandardID.PARAM_EYE_BALL_X, dragX, 1);// -1から1の値を加える
-        live2DModel.addToParamFloat(L2DStandardID.PARAM_EYE_BALL_Y, dragY, 1);
+		live2DModel.addToParamFloat(L2DStandardID.PARAM_EYE_BALL_X, dragX, 0.3f);// -1から1の値を加える
+		live2DModel.addToParamFloat(L2DStandardID.PARAM_EYE_BALL_Y, dragY, 0.3f);
 
         // 呼吸など
         live2DModel.addToParamFloat(L2DStandardID.PARAM_ANGLE_X, (float)(15 * Math.Sin(t / 6.5345)), 0.5f);

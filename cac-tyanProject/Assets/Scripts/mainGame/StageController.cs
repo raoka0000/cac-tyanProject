@@ -86,8 +86,10 @@ public class StageController : SingletonMonoBehaviour<StageController> {
 	public void EndTalk(){
 		BitUtil.Loss (ref state, (int)StateType.talking);
 		StageView.instance.HideMessage ();
-		if(StageModel.instance.nextScriptNode != null){
+		if (StageModel.instance.nextScriptNode != null) {
 			DoScriptNodeAction (StageModel.instance.nextScriptNode);
+		} else {
+			MainButton ();
 		}
 	}
 

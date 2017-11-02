@@ -18,8 +18,11 @@ public class ResetButtonEfect : MonoBehaviour {
 	private FadeUI fade;
 
 	private bool isShow = false;
-
+	private bool isAnimesion = false;
 	public void DoEffect(){
+		if(isAnimesion){
+			return;
+		}
 		if (!isShow) {
 			Show ();
 		} else {
@@ -34,6 +37,7 @@ public class ResetButtonEfect : MonoBehaviour {
 	Vector3 vec1 = new Vector3(-0.5f,0.5f,-0.5f);
 	Vector3 vec2 = new Vector3(0.5f,0.05f,0.1f);
 	public void Show(){
+		isAnimesion = true;
 		StageController.instance.showRestButton(true);
 		isShow = true;
 		obj.SetActive (true);
@@ -57,15 +61,16 @@ public class ResetButtonEfect : MonoBehaviour {
 			)
 		);
 		seq.Join (
-			noButton.DOScaleY(1f,0.1f).OnStepComplete(
-				()=>{
-					noButton.DOPunchScale(vec1,0.4f,4);
+			noButton.DOScaleY (1f, 0.1f).OnStepComplete (
+				() => {
+					noButton.DOPunchScale (vec1, 0.4f, 4);
 				}
 			)
-		);
+		).OnKill (()=>{isAnimesion = false;});
 	}
 
 	public void Hidden(){
+		isAnimesion = true;
 		isShow = false;
 		fade.Range = 1;
 		seq.Kill ();
@@ -95,6 +100,7 @@ public class ResetButtonEfect : MonoBehaviour {
 			)
 		);
 		seq.OnKill (()=>{
+			isAnimesion = false;
 			obj.SetActive (false);
 			StageController.instance.showRestButton(false);
 		});
