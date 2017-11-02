@@ -12,7 +12,7 @@
     {"id":7, "serif":"そうです！！\nその通りです！！", "question":"もしかしてそれは入学式?", "action":"qt", "branch": [8], "action2":"rm", "branch2":[6]},
     {"id":8, "serif":"だったと思います", "question":"もしかして大学の入学式?", "action":"qt", "branch": [9]},
     {"id":9, "serif":"確かに・・・何故なんでしょう？", "question":"なぜそんな記憶があるのだろう?", "action":"qt", "branch": [10], "action2":"lk", "branch2":[4]},
-    {"id":10, "serif":"そんな・・・まさか・・・", "question":"実は君は人間だったとか?", "action":"qt", "branch": [11], "action2":"rm", "branch2":[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]},
+    {"id":10, "serif":"そんな・・・まさか・・・", "question":"実は君は人間だったとか?", "action":"st", "branch": null},
     {"id":11, "serif":"・・・", "question":"一緒に考えていこう！", "action":"st", "branch": null}
   ]
 }

@@ -52,8 +52,8 @@
 			{"file":"motion/motion_2/2-7.mtn","sound":"voice/voice_2/2-7.mp3"},
 			{"file":"motion/motion_2/2-8.mtn","sound":"voice/voice_2/2-8.mp3"},
 			{"file":"motion/motion_2/2-9.mtn","sound":"voice/voice_2/2-9.mp3"},
-			{"file":"motion/motion_2/2-9.mtn","sound":"voice/voice_2/2-9.mp3"},
-			{"file":"motion/motion_2/2-9.mtn","sound":"voice/voice_2/2-9.mp3"}
+			{"file":"motion/motion_4/4-2.mtn","sound":"voice/voice_4/4-2.mp3"},
+			{"file":"motion/motion_4/4-2.mtn","sound":"voice/voice_4/4-2.mp3"}
 		],
 		"idle3":[
 			{"file":"motion/motion_3/cacmodel_ver3.mtn"}
@@ -112,13 +112,13 @@
 		"flick_head":[
 			{"file":"motion/mottosite.mtn","hit_area":"D_REF.HEAD","sound":"voice/voice_normal/motto.mp3"}
 		],
-		"tap_body":[
+		"flick_body":[
 			{"file":"motion/angry.mtn","sound":"voice/voice_normal/angry.mp3","fade_out":0},
-			{"file":"motion/mottosite.mtn","sound":"voice/voice_normal/motto.mp3","fade_out":0},
+		],
+		"tap_body":[
 			{"file":"motion/free.mtn","sound":"voice/voice_normal/free.mp3","fade_out":0},
 			{"file":"motion/hanauta.mtn","sound":"voice/voice_normal/hanauta.mp3","fade_out":0}
 		]
-
 	},
 	"project_settings":"cac_ver2.settings.json",
 	"name":"cac_ver2"

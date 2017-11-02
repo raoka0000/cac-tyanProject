@@ -464,6 +464,7 @@ public class LAppModel :L2DBaseModel
      */
     public void SetRandomExpression()
     {
+		Debug.Log ("aaa");
         int no = (int)(rand.NextDouble() * expressions.Count);
 
         string[] keys = new string[expressions.Count];
@@ -530,6 +531,12 @@ public class LAppModel :L2DBaseModel
             if (LAppDefine.DEBUG_LOG) Debug.Log("Flick face");
             StartRandomMotion(LAppDefine.MOTION_GROUP_FLICK_HEAD, LAppDefine.PRIORITY_NORMAL);
         }
+		if (HitTest(LAppDefine.HIT_AREA_BODY, x, y))
+		{
+			if (LAppDefine.DEBUG_LOG) Debug.Log("Flick body");
+			StartRandomMotion(LAppDefine.MOTION_GROUP_FLICK_BODY, LAppDefine.PRIORITY_NORMAL);
+		}
+
     }
 
 
@@ -540,6 +547,7 @@ public class LAppModel :L2DBaseModel
      * @return
      */
 	public string tapBodyMotionGroupName = LAppDefine.MOTION_GROUP_TAP_BODY;
+	//public string tapHeadMotionGroupName = LAppDefine.MOTION_GROUP_TAP_HEAD;
     public bool TapEvent(float x, float y)
     {
         if (LAppDefine.DEBUG_LOG) Debug.Log("tapEvent view x:" + x + " y:" + y);
@@ -549,6 +557,7 @@ public class LAppModel :L2DBaseModel
             // 顔をタップしたら表情切り替え
             if (LAppDefine.DEBUG_LOG) Debug.Log("Tapped face");
             //SetRandomExpression();
+			//StartRandomMotion(tapHeadMotionGroupName, LAppDefine.PRIORITY_NORMAL);
         }
         else if (HitTest(LAppDefine.HIT_AREA_BODY, x, y))
         {

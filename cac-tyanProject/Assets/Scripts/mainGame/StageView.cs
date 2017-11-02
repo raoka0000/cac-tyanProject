@@ -51,7 +51,6 @@ public class StageView : SingletonMonoBehaviour<StageView> {
 
 		ButtonNode buttonNode = item.GetComponent<ButtonNode> ();
 		buttonNode.Init (StageModel.instance.stageScriptData.stage, node);
-
 		buttons.Add (buttonNode);
 
 	}
@@ -77,10 +76,25 @@ public class StageView : SingletonMonoBehaviour<StageView> {
 		StageController.instance.MainButton ();
 	}
 
-	public void MoveLive2dModel (FunctionVoid callback = null){
-		StageController.instance.modelProxy.transform
-			.DOMove (new Vector3 (-8, 0, 0), CAC_TYAN_MOVE_TIME)
-			.OnComplete(callback.NullGuard);
+	private bool isMoveingLive2dModel = false;
+	public void MoveLive2dModel (bool isGo,FunctionVoid callback = null){
+		if (isMoveingLive2dModel) return;
+		if (isGo) {
+			StageController.instance.modelProxy.transform
+				.DOMove (new Vector3 (-8, 0, 0), CAC_TYAN_MOVE_TIME)
+				.OnComplete (()=>{
+					isMoveingLive2dModel = false;
+					callback.NullGuard();
+				});
+		} else {
+			StageController.instance.modelProxy.transform
+				.DOMove (new Vector3 (0, 0, 0), CAC_TYAN_MOVE_TIME)
+				.OnComplete (()=>{
+					isMoveingLive2dModel = false;
+					callback.NullGuard();
+				});
+			
+		}
 	}
 
 	public void ShowQuestions(){
@@ -88,6 +102,10 @@ public class StageView : SingletonMonoBehaviour<StageView> {
 		const float maxRad = Mathf.PI * 0.5f;
 		MainButton.DOAnchorPos (Vector2.zero, QUESTION_MOVE_TIME);
 		for(int i  = 0; i < buttons.Count; i++){
+			Color col = Camera.main.backgroundColor;
+			col.a = 0.8f;
+			buttons [i].image.color = col;
+
 			float theta = Mathf.Lerp (0, maxRad, ((float)i + 1.0f) / ((float)buttons.Count + 1) ) + (Mathf.PI * 1.75f) - 0.05f;
 			int id = buttons.Count - 1 - i;
 			buttons [id].rectTransform.localRotation = Quaternion.Euler(0, 0, theta * Mathf.Rad2Deg);
@@ -98,6 +116,20 @@ public class StageView : SingletonMonoBehaviour<StageView> {
 			seq.Append (buttons[id].rectTransform.DOAnchorPos (new Vector2(Mathf.Cos(theta) * r, Mathf.Sin(theta) * r), QUESTION_MOVE_TIME, true));
 		}
 	}
+	public void HideQuestions(){
+		foreach(ButtonNode buttonNode in buttons){
+			buttonNode.rectTransform.DOAnchorPos (new Vector2(350, 0), QUESTION_MOVE_TIME
+			).OnComplete(
+				() => {
+					buttonNode.Hidden();
+				}
+			);
+		}
+		/*StartQuestionButtonの処理*/
+		MainButton.DOAnchorPos (new Vector2(92,0), QUESTION_MOVE_TIME);
+
+	}
+
 
 	public void Selected(ButtonNode bNode){
 		const float TIME = 0.5f;
@@ -115,19 +147,29 @@ public class StageView : SingletonMonoBehaviour<StageView> {
 				TIME
 			)
 		);
+		Image newbatch = bNode.newBatch.GetComponent<Image> ();
+		seq.Join(
+			DOTween.ToAlpha(
+				() => newbatch.color, 
+				color => newbatch.color = color,
+				0f,                                // 最終的なalpha値
+				TIME
+			)
+		);
 		seq.Join(
 			DOTween.ToAlpha(
 				() => bNode.image.color, 
 				color => bNode.image.color = color,
 				0f,                                // 最終的なalpha値
 				TIME
-			).OnComplete(
-				() => {
-					StageController.instance.QuestionSelected(bNode.scriptNode);
-				}
 			)
 		);
-
+		seq.OnComplete (
+			() => {
+				StageController.instance.QuestionSelected (bNode.scriptNode);
+			}
+		);
+			
 		//押されていないボタンの処理
 		foreach(ButtonNode buttonNode in buttons){
 			if (bNode != buttonNode) {
@@ -141,6 +183,10 @@ public class StageView : SingletonMonoBehaviour<StageView> {
 		}
 		/*StartQuestionButtonの処理*/
 		MainButton.DOAnchorPos (new Vector2(92,0), QUESTION_MOVE_TIME);
+	}
+
+	public void ChengeBeseColor(Color col){
+		Camera.main.DOColor(col, 1);
 	}
 
 
