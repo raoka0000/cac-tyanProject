@@ -207,7 +207,7 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager>
 	/// <summary>
 	/// BGMとSEのボリュームを別々に変更&保存
 	/// </summary>
-	public void ChangeVolume (float BGMVolume, float SEVolume)
+	public void ChangeVolume (float BGMVolume = BGM_VOLUME_DEFULT, float SEVolume = SE_VOLUME_DEFULT)
 	{
 		_bgmSource.volume = BGMVolume;
 		foreach(AudioSource seSource in _seSourceList){

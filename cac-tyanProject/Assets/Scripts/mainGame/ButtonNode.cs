@@ -15,7 +15,8 @@ public class ButtonNode : MonoBehaviour {
 		set { SetSerifNode (value); }
 	}
 
-	public GameObject newBatch;
+	public RectTransform newBatch;
+	public RectTransform stBstch;
 
 	private bool _isNew = true;
 	public bool isNew{
@@ -45,6 +46,7 @@ public class ButtonNode : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		rectTransform = GetComponent<RectTransform> ();
+		if (scriptNode != null &&scriptNode.action == "st") stBstch.gameObject.SetActive (true);
 	}
 	
 	public void Init(string stage, ScriptNode node){
@@ -60,7 +62,13 @@ public class ButtonNode : MonoBehaviour {
 	}
 
 	private void SetNewbadge(bool n){
-		newBatch.SetActive (n);
+		if (n) {
+			//newBatch.DOPunchScale (new Vector2 (0.45f, 0.45f), 1, 0).SetLoops (-1);
+			newBatch.DOScale(new Vector2 (0.05f, 0.05f),0.8f).SetRelative().SetLoops(-1,LoopType.Yoyo);
+		} else {
+			newBatch.DOKill ();
+		}
+		newBatch.gameObject.SetActive (n);
 	}
 
 	public void OnClick(){

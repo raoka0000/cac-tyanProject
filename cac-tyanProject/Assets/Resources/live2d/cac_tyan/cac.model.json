@@ -94,7 +94,9 @@
 			{"file":"motion/motion_4/4-9.mtn","sound":"voice/voice_4/4-9.mp3"},
 			{"file":"motion/motion_4/4-10.mtn","sound":"voice/voice_4/4-10.mp3"},
 			{"file":"motion/motion_4/4-11.mtn","sound":"voice/voice_4/4_11.mp3"},
-			{"file":"motion/motion_4/4-12.mtn","sound":"voice/voice_4/4-12.mp3"},
+			{"file":"motion/motion_4/4-12.mtn","sound":"voice/voice_4/4-12.mp3"}
+		],
+		"endTalks":[
 			{"file":"motion/motion_4/4-13.mtn","sound":"voice/voice_4/4-13.mp3"},
 			{"file":"motion/motion_4/4-14.mtn","sound":"voice/voice_4/4-14.mp3"},
 			{"file":"motion/motion_4/4-15.mtn","sound":"voice/voice_4/4-15.mp3"},
@@ -110,14 +112,22 @@
 			{"file":"motion/thankyou.mtn","sound":"voice/voice_normal/thank.mp3"}
 		],
 		"flick_head":[
-			{"file":"motion/mottosite.mtn","hit_area":"D_REF.HEAD","sound":"voice/voice_normal/motto.mp3"}
+			{"file":"motion/motion_ex/cac_n_1_after.mtn"},
+			{"file":"motion/mottosite.mtn","hit_area":"D_REF.HEAD","sound":"voice/voice_normal/motto.mp3"},
+			{"file":"motion/nadenade.mtn","hit_area":"D_REF.HEAD","sound":"voice/voice_normal/nadenade.mp3"}
 		],
 		"flick_body":[
 			{"file":"motion/angry.mtn","sound":"voice/voice_normal/angry.mp3","fade_out":0},
+			{"file":"motion/motion_ex/cac_n_4_1.mtn"}
 		],
 		"tap_body":[
-			{"file":"motion/free.mtn","sound":"voice/voice_normal/free.mp3","fade_out":0},
-			{"file":"motion/hanauta.mtn","sound":"voice/voice_normal/hanauta.mp3","fade_out":0}
+			{"file":"motion/motion_ex/cac_n_1_before.mtn"},
+			{"file":"motion/motion_ex/cac_n_3_1.mtn"},
+			{"file":"motion/motion_ex/cac_n_3_2.mtn"},
+		],
+		"tap_head":[
+			{"file":"motion/motion_ex/cac_n_1_before.mtn"},
+			{"file":"motion/nadenade.mtn","hit_area":"D_REF.HEAD","sound":"voice/voice_normal/nadenade.mp3"},
 		]
 	},
 	"project_settings":"cac_ver2.settings.json",

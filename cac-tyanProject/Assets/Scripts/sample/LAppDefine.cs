@@ -35,6 +35,7 @@ public class LAppDefine
 	// 外部定義ファイル(json)と合わせる
 	public const string MOTION_GROUP_IDLE		= "idle";		// アイドリング
 	public const string MOTION_GROUP_TAP_BODY	= "tap_body";	// 体をタップしたとき
+	public const string MOTION_GROUP_TAP_HEAD	= "tap_head";	// 頭をタップしたとき
 	public const string MOTION_GROUP_FLICK_BODY	= "flick_body";	// 頭を撫でた時
 	public const string MOTION_GROUP_FLICK_HEAD	= "flick_head";	// 頭を撫でた時
 	public const string MOTION_GROUP_PINCH_IN	= "pinch_in";	// 拡大した時
@@ -48,7 +49,7 @@ public class LAppDefine
 	// モーションの優先度定数
 	public const int PRIORITY_NONE	 = 0;
 	public const int PRIORITY_IDLE	 = 1;
-	public const int PRIORITY_NORMAL = 2;
+	public const int PRIORITY_NORMAL = 4;
  	public const int PRIORITY_TALK	 = 4;
 	public const int PRIORITY_FORCE	 = 4;
 }

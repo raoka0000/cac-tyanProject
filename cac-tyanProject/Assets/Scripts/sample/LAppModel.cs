@@ -547,7 +547,7 @@ public class LAppModel :L2DBaseModel
      * @return
      */
 	public string tapBodyMotionGroupName = LAppDefine.MOTION_GROUP_TAP_BODY;
-	//public string tapHeadMotionGroupName = LAppDefine.MOTION_GROUP_TAP_HEAD;
+	public string tapHeadMotionGroupName = LAppDefine.MOTION_GROUP_TAP_HEAD;
     public bool TapEvent(float x, float y)
     {
         if (LAppDefine.DEBUG_LOG) Debug.Log("tapEvent view x:" + x + " y:" + y);
@@ -557,7 +557,7 @@ public class LAppModel :L2DBaseModel
             // 顔をタップしたら表情切り替え
             if (LAppDefine.DEBUG_LOG) Debug.Log("Tapped face");
             //SetRandomExpression();
-			//StartRandomMotion(tapHeadMotionGroupName, LAppDefine.PRIORITY_NORMAL);
+			StartRandomMotion(tapHeadMotionGroupName, LAppDefine.PRIORITY_NORMAL);
         }
         else if (HitTest(LAppDefine.HIT_AREA_BODY, x, y))
         {

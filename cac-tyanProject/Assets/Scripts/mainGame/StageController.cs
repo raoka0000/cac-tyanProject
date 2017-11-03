@@ -7,7 +7,9 @@ public enum StateType{
 	qestionTime = 1<<1,
 	talking = 1<<2,
 	showRestButton = 1<<3,
-	resting = 1<<4
+	resting = 1<<4,
+	end = 1<<4,
+	idle2 = 1<<5
 }
 
 
@@ -58,10 +60,25 @@ public class StageController : SingletonMonoBehaviour<StageController> {
 	}
 
 	/*ボタン*/
+	private int frontEndTalkId = 4;
 	public void MainButton(){
 		if (BitUtil.Exist (state, (int)StateType.showRestButton)) {
 			return;
 		}
+		if (BitUtil.Exist (state, (int)StateType.end) && !BitUtil.Exist (state, (int)StateType.talking)) {
+			StageView.instance.HideQuestions ();
+			int n;
+			for(;;){
+				n = Random.Range (0, StageModel.endTalks.Length);
+				if (n != frontEndTalkId) {
+					frontEndTalkId = n;
+					break;
+				}
+			}
+			StartTalk (StageModel.endTalks[n]);
+			return;
+		}
+
 		if (BitUtil.Exist (state, (int)StateType.idle)) {
 			//myGameCtrl.enabled = false;
 			StageView.instance.MoveLive2dModel (
@@ -72,15 +89,23 @@ public class StageController : SingletonMonoBehaviour<StageController> {
 			);
 			BitUtil.Loss (ref state, (int)StateType.idle);
 			return;
-		} else if (StageModel.instance.nextScriptNode == null) {
+		} else if(BitUtil.Exist (state, (int)StateType.idle2)){
+			StageView.instance.MoveLive2dModel (
+				true,
+				() => {
+					//DoScriptNodeAction (StageModel.instance.stageScriptData.scriptNodes [0]);
+				}
+			);
+			BitUtil.Loss (ref state, (int)StateType.idle2);
+		}else if (StageModel.instance.nextScriptNode == null && !BitUtil.Exist (state, (int)StateType.end)) {
 			StageView.instance.ShowQuestions ();
-		} else {
+		} else if(!BitUtil.Exist (state, (int)StateType.end)){
 			DoScriptNodeAction (StageModel.instance.nextScriptNode);
 		}
 	}
 
 	public void HiddenModel(){
-		if (!BitUtil.Exist (state, (int)StateType.idle) && !BitUtil.Exist (state, (int)StateType.talking)) {
+		if (!BitUtil.Exist (state, (int)StateType.idle2) && !BitUtil.Exist (state, (int)StateType.talking)) {
 			StageView.instance.HideQuestions ();
 			StageView.instance.MoveLive2dModel (
 				false,
@@ -88,7 +113,7 @@ public class StageController : SingletonMonoBehaviour<StageController> {
 					//myGameCtrl.enabled = true;
 				}
 			);
-			BitUtil.Add (ref state, (int)StateType.idle);
+			BitUtil.Add (ref state, (int)StateType.idle2);
 			return;
 		}
 	}
@@ -102,6 +127,11 @@ public class StageController : SingletonMonoBehaviour<StageController> {
 		StageView.instance.ShowMessage (node.serif);
 		modelProxy.model.StartMotion (StageModel.instance.stageScriptData.stage, node.id - 1, LAppDefine.PRIORITY_TALK, doAudioCheckingForHideMessage);
 	}
+	public void StartTalk(TalkNode node){
+		StageView.instance.ShowMessage (node.serif);
+		modelProxy.model.StartMotion (node.group, node.no, LAppDefine.PRIORITY_TALK, doAudioCheckingForHideMessage);
+	}
+
 
 	public void EndTalk(){
 		if (!BitUtil.Exist (state, (int)StateType.talking)) return;
@@ -109,8 +139,10 @@ public class StageController : SingletonMonoBehaviour<StageController> {
 		StageView.instance.HideMessage ();
 		if (StageModel.instance.nextScriptNode != null) {
 			DoScriptNodeAction (StageModel.instance.nextScriptNode);
-		} else {
+		} else if (!BitUtil.Exist (state, (int)StateType.end)) {
 			MainButton ();
+		} else if(!StageView.instance.isShowQuestions){
+			//StageView.instance.ShowQuestions ();
 		}
 	}
 
@@ -124,7 +156,7 @@ public class StageController : SingletonMonoBehaviour<StageController> {
 
 	void DoScriptNodeAction(ScriptNode node){
 		StageModel.instance.nextScriptNode = null;
-		Debug.Log (node.id + " : " + StageModel.instance.stageScriptData.stage);
+		//Debug.Log (node.id + " : " + StageModel.instance.stageScriptData.stage);
 		if (node.action2 == "lk") {
 			//Lockがかかっている場合、アクションをすることができない.
 			if (!StageModel.instance.IsEndScriptNodeContin(node.branch2)) {
@@ -152,6 +184,8 @@ public class StageController : SingletonMonoBehaviour<StageController> {
 			foreach (int n in node.branch) {
 				StageModel.instance.AddCurrentQuestion (n);
 			}
+		}else if(node.action == "end"){
+			BitUtil.Add (ref state, (int)StateType.end);
 		}
 
 		if (node.action2 == "rm") {
@@ -177,11 +211,12 @@ public class StageController : SingletonMonoBehaviour<StageController> {
 		}else if(n == 2){
 			//Camera.main.backgroundColor = Color.yellow;
 			StageView.instance.ChengeBeseColor (new Color(114.0f/255.0f, 147.0f/255.0f, 169.0f/255.0f));
-			AudioManager.instance.PlayBGM("comvini");
+			AudioManager.instance.PlayBGM("comvini",10f);
 		}else if(n == 3){
 			//Camera.main.backgroundColor = Color.blue;
 			StageView.instance.ChengeBeseColor (new Color(79.0f/255.0f, 101.0f/255.0f, 131.0f/255.0f));
 			AudioManager.instance.PlayBGM("Y 02 -01");
+			AudioManager.instance.ChangeVolume (0.8f);
 		}
 	}
 
@@ -196,6 +231,9 @@ public class StageController : SingletonMonoBehaviour<StageController> {
 	}
 
 	public void DoRest(){
+		if(BitUtil.Exist (state, (int)StateType.end)){
+			StartTalk(new TalkNode("thank",0,"ありがとうございました"));
+		}
 		dummy.SetActive (true);
 		Time.timeScale = 0.001f;
 		AudioManager.instance.StopBGM ();

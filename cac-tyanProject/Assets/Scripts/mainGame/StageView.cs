@@ -22,6 +22,8 @@ public class StageView : SingletonMonoBehaviour<StageView> {
 	public RectTransform questionButton;
 	[SerializeField]
 	public RectTransform resetButton;
+	[SerializeField]
+	public ResetButtonEfect reset;
 
 	void Start () {
 		StageModel.instance.AddCurrentQuestionsListener     = AddButton;
@@ -35,12 +37,6 @@ public class StageView : SingletonMonoBehaviour<StageView> {
 			pos.z = 0;
 			ParticleManager.instance.DoTapEffect(pos);
 		}
-		/*
-		if(Input.touchCount > 0){ // Editor/マウス操作の場合は Input.GetMouseButton(0) にする
-			var pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-			pos.z = 0;
-			ParticleManager.instance.DoTapEffect(pos);
-		}*/
 	}
 
 
@@ -81,7 +77,7 @@ public class StageView : SingletonMonoBehaviour<StageView> {
 		if (isMoveingLive2dModel) return;
 		if (isGo) {
 			StageController.instance.modelProxy.transform
-				.DOMove (new Vector3 (-8, 0, 0), CAC_TYAN_MOVE_TIME)
+				.DOMove (new Vector3 (-7.7f, 0, 0), CAC_TYAN_MOVE_TIME)
 				.OnComplete (()=>{
 					isMoveingLive2dModel = false;
 					callback.NullGuard();
@@ -97,7 +93,9 @@ public class StageView : SingletonMonoBehaviour<StageView> {
 		}
 	}
 
+	public bool isShowQuestions = false;
 	public void ShowQuestions(){
+		isShowQuestions = true;
 		const float r = -350f;
 		const float maxRad = Mathf.PI * 0.5f;
 		MainButton.DOAnchorPos (Vector2.zero, QUESTION_MOVE_TIME);
@@ -110,6 +108,7 @@ public class StageView : SingletonMonoBehaviour<StageView> {
 			int id = buttons.Count - 1 - i;
 			buttons [id].rectTransform.localRotation = Quaternion.Euler(0, 0, theta * Mathf.Rad2Deg);
 			Sequence seq = DOTween.Sequence();
+			buttons [id].rectTransform.DOKill ();
 			seq.SetDelay((float)i / 10f);
 			seq.Append (buttons[id].rectTransform.DOAnchorPos (new Vector2(Mathf.Cos(theta) * r * 1.3f, Mathf.Sin(theta) * r * 1.3f), QUESTION_MOVE_TIME, true));
 			seq.Append (buttons[id].rectTransform.DOAnchorPos (new Vector2(Mathf.Cos(theta) * r * 0.9f, Mathf.Sin(theta) * r * 0.9f), QUESTION_MOVE_TIME, true));
@@ -126,7 +125,7 @@ public class StageView : SingletonMonoBehaviour<StageView> {
 			);
 		}
 		/*StartQuestionButtonの処理*/
-		MainButton.DOAnchorPos (new Vector2(92,0), QUESTION_MOVE_TIME);
+		MainButton.DOAnchorPos (new Vector2(92,0), QUESTION_MOVE_TIME).OnComplete(()=>{isShowQuestions = false;});
 
 	}
 
@@ -134,6 +133,7 @@ public class StageView : SingletonMonoBehaviour<StageView> {
 	public void Selected(ButtonNode bNode){
 		const float TIME = 0.5f;
 		//押されたボタンの処理
+		bNode.rectTransform.DOKill ();
 		Sequence seq = DOTween.Sequence();
 		seq.Append (
 			//node.rectTransform.DOPunchScale (new Vector3 (0.3f, 0.3f), TIME, 4)

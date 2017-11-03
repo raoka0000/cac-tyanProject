@@ -19,7 +19,12 @@ public class ResetButtonEfect : MonoBehaviour {
 
 	private bool isShow = false;
 	private bool isAnimesion = false;
+	private bool isComebackMode = false;
+
 	public void DoEffect(){
+		if (isComebackMode) {
+			
+		}
 		if(isAnimesion){
 			return;
 		}
@@ -29,6 +34,7 @@ public class ResetButtonEfect : MonoBehaviour {
 			Hidden ();
 		}
 	}
+
 	Sequence seq;
 	void Start () {
 		seq = DOTween.Sequence ();
