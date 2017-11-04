@@ -29,6 +29,8 @@ public class StageController : SingletonMonoBehaviour<StageController> {
 	[SerializeField]
 	private GameObject dummy;
 
+	public FreeTime freeTime;
+
 
 	[SerializeField]
 	private LAppModelProxy _modelProxy;
@@ -124,10 +126,12 @@ public class StageController : SingletonMonoBehaviour<StageController> {
 	}
 
 	public void StartTalk(ScriptNode node){
+		freeTime.timer = 0;
 		StageView.instance.ShowMessage (node.serif);
 		modelProxy.model.StartMotion (StageModel.instance.stageScriptData.stage, node.id - 1, LAppDefine.PRIORITY_TALK, doAudioCheckingForHideMessage);
 	}
 	public void StartTalk(TalkNode node){
+		freeTime.timer = 0;
 		StageView.instance.ShowMessage (node.serif);
 		modelProxy.model.StartMotion (node.group, node.no, LAppDefine.PRIORITY_TALK, doAudioCheckingForHideMessage);
 	}
@@ -164,7 +168,6 @@ public class StageController : SingletonMonoBehaviour<StageController> {
 				return;
 			}
 		}
-
 		if (node.action == "tk") {
 			//喋るだけ.
 			StartTalk(StageModel.instance.scriptNodes[node.branch[0]]);
@@ -203,20 +206,33 @@ public class StageController : SingletonMonoBehaviour<StageController> {
 		if (n == 0) {
 			AudioManager.instance.PlayBGM ("Y 04 日常-17");
 			Camera.main.backgroundColor = Color.white;
-			//AudioManager.instance.PlayBGM (1);
+			modelProxy.model.tapHeadMotionGroupName   = "tap_head";
+			modelProxy.model.tapBodyMotionGroupName   = "tap_body";
+			modelProxy.model.flickHeadMotionGroupName = "flick_head";
+			modelProxy.model.flickBodyMotionGroupName = "flick_body";
 		}else if(n == 1){
-			//Camera.main.backgroundColor = Color.red;
 			StageView.instance.ChengeBeseColor (new Color(169.0f/255.0f, 203.0f/255.0f, 225.0f/255.0f));
 			AudioManager.instance.PlayBGM("Y 05 黒");
+			modelProxy.model.tapHeadMotionGroupName   = "tap_head2";
+			modelProxy.model.tapBodyMotionGroupName   = "tap_body2";
+			modelProxy.model.flickHeadMotionGroupName = "flick_head2";
+			modelProxy.model.flickBodyMotionGroupName = "flick_body2";
 		}else if(n == 2){
-			//Camera.main.backgroundColor = Color.yellow;
-			StageView.instance.ChengeBeseColor (new Color(114.0f/255.0f, 147.0f/255.0f, 169.0f/255.0f));
+			//StageView.instance.ChengeBeseColor (new Color(114.0f/255.0f, 147.0f/255.0f, 169.0f/255.0f));
+			StageView.instance.ChengeBeseColor (new Color(221.0f/255.0f, 255.0f/255.0f, 221.0f/255.0f));
 			AudioManager.instance.PlayBGM("comvini",10f);
+			modelProxy.model.tapHeadMotionGroupName   = "tap_head2";
+			modelProxy.model.tapBodyMotionGroupName   = "tap_body2";
+			modelProxy.model.flickHeadMotionGroupName = "flick_head2";
+			modelProxy.model.flickBodyMotionGroupName = "flick_body2";
 		}else if(n == 3){
-			//Camera.main.backgroundColor = Color.blue;
 			StageView.instance.ChengeBeseColor (new Color(79.0f/255.0f, 101.0f/255.0f, 131.0f/255.0f));
 			AudioManager.instance.PlayBGM("Y 02 -01");
 			AudioManager.instance.ChangeVolume (0.8f);
+			modelProxy.model.tapHeadMotionGroupName = "tap_head4";
+			modelProxy.model.tapBodyMotionGroupName = "tap_body4";
+			modelProxy.model.flickHeadMotionGroupName = "flick_head4";
+			modelProxy.model.flickBodyMotionGroupName = "flick_body4";
 		}
 	}
 

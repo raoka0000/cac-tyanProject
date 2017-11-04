@@ -521,6 +521,11 @@ public class LAppModel :L2DBaseModel
      * @param
      * @param flickDist
      */
+	public string tapBodyMotionGroupName   = LAppDefine.MOTION_GROUP_TAP_BODY;
+	public string tapHeadMotionGroupName   = LAppDefine.MOTION_GROUP_TAP_HEAD;
+	public string flickBodyMotionGroupName = LAppDefine.MOTION_GROUP_FLICK_BODY;
+	public string flickHeadMotionGroupName = LAppDefine.MOTION_GROUP_FLICK_HEAD;
+
     public void FlickEvent(float x, float y)
     {
 
@@ -546,8 +551,6 @@ public class LAppModel :L2DBaseModel
      * @param y	タップの座標 y
      * @return
      */
-	public string tapBodyMotionGroupName = LAppDefine.MOTION_GROUP_TAP_BODY;
-	public string tapHeadMotionGroupName = LAppDefine.MOTION_GROUP_TAP_HEAD;
     public bool TapEvent(float x, float y)
     {
         if (LAppDefine.DEBUG_LOG) Debug.Log("tapEvent view x:" + x + " y:" + y);

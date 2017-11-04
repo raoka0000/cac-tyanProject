@@ -2,17 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FreeTIme : MonoBehaviour {
+public class FreeTime : MonoBehaviour {
 	
 	// Update is called once per frame
-	private float timer = 0;
+	public float timer = 0;
 	int frontEndTalkId = 4;
 	void Update () {
+		if (StageModel.instance.stageScriptData.stage == "stage3" || StageModel.instance.stageScriptData.stage == "stage4")
+			return;
 		timer += Time.deltaTime;
 		if (Input.GetMouseButtonDown (0)) {
 			timer = 0;
 		}
-		if(timer > 10f){
+		if(timer > 60f){
 			timer = -10;
 			int n;
 			for(;;){

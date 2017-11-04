@@ -27,7 +27,6 @@
 			{"file":"motion/motion_1/1.mtn","sound":"voice/voice_1/1.mp3"},
 			{"file":"motion/motion_1/2.mtn","sound":"voice/voice_1/2.mp3"},
 			{"file":"motion/motion_1/3.mtn","sound":"voice/voice_1/3.mp3"},
-			{"file":"motion/motion_1/4.mtn","sound":"voice/voice_1/4.mp3"},
 			{"file":"motion/motion_1/5.mtn","sound":"voice/voice_1/5.mp3"},
 			{"file":"motion/motion_1/6.mtn","sound":"voice/voice_1/6.mp3"},
 			{"file":"motion/motion_1/7.mtn","sound":"voice/voice_1/7.mp3"},
@@ -37,7 +36,7 @@
 			{"file":"motion/motion_1/11.mtn","sound":"voice/voice_1/11.mp3"},
 			{"file":"motion/motion_1/12.mtn","sound":"voice/voice_1/12.mp3"},
 			{"file":"motion/motion_1/13.mtn","sound":"voice/voice_1/13.mp3"},
-			{"file":"motion/motion_1/14.mtn"}
+			{"file":"motion/motion_1/14.mtn","sound":"voice/voice_normal/silent"}
 		],
 		"idle2":[
 			{"file":"motion/motion_2/cacModel_2.mtn"}
@@ -76,8 +75,8 @@
 			{"file":"motion/motion_3/3_15.mtn","sound":"voice/voice_3/3_15.mp3"},
 			{"file":"motion/motion_3/3_16.mtn","sound":"voice/voice_3/3_16.mp3"},
 			{"file":"motion/motion_3/3_17.mtn","sound":"voice/voice_3/3_17.mp3"},
-			{"file":"motion/motion_4/4-1.mtn","sound":"voice/voice_4/4-1.mp3"},
-			{"file":"motion/motion_4/4-2.mtn","sound":"voice/voice_4/4-2.mp3"}
+			{"file":"motion/motion_1/14.mtn","sound":"voice/voice_normal/silent"},
+			{"file":"motion/motion_1/14.mtn","sound":"voice/voice_normal/silent"}
 		],
 		"idle4":[
 			{"file":"motion/motion_4/cacModel_4.mtn"}
@@ -111,6 +110,7 @@
 		"thank":[
 			{"file":"motion/thankyou.mtn","sound":"voice/voice_normal/thank.mp3"}
 		],
+
 		"flick_head":[
 			{"file":"motion/motion_ex/cac_n_1_after.mtn"},
 			{"file":"motion/mottosite.mtn","hit_area":"D_REF.HEAD","sound":"voice/voice_normal/motto.mp3"},
@@ -128,7 +128,40 @@
 		"tap_head":[
 			{"file":"motion/motion_ex/cac_n_1_before.mtn"},
 			{"file":"motion/nadenade.mtn","hit_area":"D_REF.HEAD","sound":"voice/voice_normal/nadenade.mp3"},
+		],
+
+		"flick_head2":[
+			{"file":"motion/motion_ex/cac_n_4_1.mtn"},
+			{"file":"motion/motion_ex/cac_n_3_1.mtn"}
+		],
+		"flick_body2":[
+			{"file":"motion/motion_ex/cac_n_4_1.mtn"},
+			{"file":"motion/angry.mtn","sound":"voice/voice_normal/angry.mp3","fade_out":0},
+		],
+		"tap_body2":[
+			{"file":"motion/motion_ex/cac_n_4_1.mtn"},
+			{"file":"motion/motion_ex/cac_n_3_1.mtn"},
+			{"file":"motion/motion_ex/cac_n_3_2.mtn"}
+		],
+		"tap_head2":[
+			{"file":"motion/motion_ex/cac_n_4_1.mtn"}
+		],
+
+		"flick_head4":[
+			{"file":"motion/motion_ex/cac_n_4_1.mtn"},
+			{"file":"motion/motion_ex/cac_n_3_1.mtn"}
+		],
+		"flick_body4":[
+			{"file":"motion/motion_ex/cac_n_4_1.mtn"},
+			{"file":"motion/motion_4/4-17.mtn","sound":"voice/voice_4/4-17.mp3"}
+		],
+		"tap_body4":[
+			{"file":"motion/motion_ex/cac_n_4_1.mtn"},
+		],
+		"tap_head4":[
+			{"file":"motion/motion_ex/cac_n_3_2.mtn"}
 		]
+
 	},
 	"project_settings":"cac_ver2.settings.json",
 	"name":"cac_ver2"

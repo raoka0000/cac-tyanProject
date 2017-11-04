@@ -4,18 +4,17 @@
   [
     {"id":0, "serif":"イベント用 tk:喋るだけ qt:新しい質問 st:次のステージへ", "question":"このメッセージはでないよ", "action":"tk", "branch":[1]},
     {"id":1, "serif":"初めまして、CACの看板娘です！", "question":"test", "action":"qt", "branch":[2]},
-    {"id":2, "serif":"部活の皆さんからはCACちゃんと呼ばれています", "question":"君の名前は?", "action":"qt", "branch":[3,6]},
-    {"id":3, "serif":"18歳です!", "question":"何歳なの?", "action":"qt", "branch":[4,5,2]},
-    {"id":4, "serif":"怒りますよ?", "question":"おっぱいのサイズは?", "action":"qt", "branch": null},
-    {"id":5, "serif":"ここにいるみんなが好きですよ", "question":"好きな人とかいるの？", "action":"qt", "branch": [10]},
-    {"id":6, "serif":"ここでみなさんにCACの案内をしています", "question":"君はここで何をしているの?", "action":"qt", "branch": [7,9]},
-    {"id":7, "serif":"何かを作り出す、とっても素敵な部活です", "question":"CACってどんな部活？", "action":"qt", "branch": [8]},
-    {"id":8, "serif":"ここにたくさん展示しているじゃないですか\n見ていってください！", "question":"例えばどんなのがあるの？", "action":"qt", "branch": null},
-    {"id":9, "serif":"みなさんと会話できるのは楽しいですよ!", "question":"そこにいて退屈じゃない?", "action":"qt", "branch": [10,11]},
-    {"id":10, "serif":"それが・・・やることなくて暇なんですよ", "question":"普段は何しているの？", "action":"qt", "branch": [11]},
-    {"id":11, "serif":"昔はよくピクニックにいってました!", "question":"趣味とかあるの？", "action":"qt", "branch": [12,13]},
-    {"id":12, "serif":"それは色々ですよ。近くの公園とか、山とか", "question":"どんなところに行っていたの？", "action":"qt", "branch": null},
-    {"id":13, "serif":"過去ぐらいありますよ！", "question":"昔?君に過去があるの？", "action":"qt", "branch": [14]},
-    {"id":14, "serif":"・・・", "question":"データ上の\n存在なのに?", "action":"st", "branch": null}
+    {"id":2, "serif":"部活の皆さんからはCACちゃんと呼ばれています", "question":"君の名前は?", "action":"qt", "branch":[3,5]},
+    {"id":3, "serif":"18歳です!", "question":"何歳なの?", "action":"qt", "branch":[4,2]},
+    {"id":4, "serif":"ここにいるみんなが好きですよ", "question":"好きな人とかいるの？", "action":"qt", "branch": [9]},
+    {"id":5, "serif":"ここでみなさんにCACの案内をしています", "question":"君はここで何をしているの?", "action":"qt", "branch": [6,8]},
+    {"id":6, "serif":"何かを作り出す、とっても素敵な部活です", "question":"CACってどんな部活？", "action":"qt", "branch": [7]},
+    {"id":7, "serif":"ここにたくさん展示しているじゃないですか\n見ていってください！", "question":"例えばどんなのがあるの？", "action":"qt", "branch": null},
+    {"id":8, "serif":"みなさんと会話できるのは楽しいですよ!", "question":"そこにいて退屈じゃない?", "action":"qt", "branch": [9,10]},
+    {"id":9, "serif":"それが・・・やることなくて暇なんですよ", "question":"普段は何しているの？", "action":"qt", "branch": [10]},
+    {"id":10, "serif":"昔はよくピクニックにいってました!", "question":"趣味とかあるの？", "action":"qt", "branch": [11,12]},
+    {"id":11, "serif":"それは色々ですよ。近くの公園とか、山とか", "question":"どんなところに行っていたの？", "action":"qt", "branch": null},
+    {"id":12, "serif":"過去ぐらいありますよ！", "question":"昔?君に過去があるの？", "action":"qt", "branch": [13]},
+    {"id":13, "serif":"...", "question":"データ上の\n存在なのに?", "action":"st", "branch": null}
   ]
 }
