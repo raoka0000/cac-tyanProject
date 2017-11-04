@@ -14,6 +14,7 @@ public class ButtonNode : MonoBehaviour {
 		get { return _scriptNode; }
 		set { SetSerifNode (value); }
 	}
+	public Button button;
 
 	public RectTransform newBatch;
 	public RectTransform stBstch;

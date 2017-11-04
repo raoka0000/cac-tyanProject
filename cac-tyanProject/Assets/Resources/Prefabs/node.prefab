@@ -154,6 +154,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stage: 1
   deathFlg: 0
+  button: {fileID: 114506220958072240}
   newBatch: {fileID: 224703685538400502}
   stBstch: {fileID: 224903615103392278}
   rectTransform: {fileID: 224441019165557788}

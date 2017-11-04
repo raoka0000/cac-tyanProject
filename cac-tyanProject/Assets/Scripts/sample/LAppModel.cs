@@ -581,7 +581,8 @@ public class LAppModel :L2DBaseModel
     {
         if (LAppDefine.DEBUG_LOG) Debug.Log("Shake Event");
 
-        StartRandomMotion(LAppDefine.MOTION_GROUP_SHAKE, LAppDefine.PRIORITY_FORCE);
+        //StartRandomMotion(LAppDefine.MOTION_GROUP_SHAKE, LAppDefine.PRIORITY_FORCE);
+		StageController.instance.ShakeEvent();
     }
 
 

@@ -49,7 +49,7 @@ public class LAppDefine
 	// モーションの優先度定数
 	public const int PRIORITY_NONE	 = 0;
 	public const int PRIORITY_IDLE	 = 1;
-	public const int PRIORITY_NORMAL = 4;
+	public const int PRIORITY_NORMAL = 3;
  	public const int PRIORITY_TALK	 = 4;
 	public const int PRIORITY_FORCE	 = 4;
 }

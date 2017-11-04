@@ -103,20 +103,22 @@ public class StageView : SingletonMonoBehaviour<StageView> {
 			Color col = Camera.main.backgroundColor;
 			col.a = 0.8f;
 			buttons [i].image.color = col;
-
+			buttons [i].button.enabled = true;
 			float theta = Mathf.Lerp (0, maxRad, ((float)i + 1.0f) / ((float)buttons.Count + 1) ) + (Mathf.PI * 1.75f) - 0.05f;
 			int id = buttons.Count - 1 - i;
 			buttons [id].rectTransform.localRotation = Quaternion.Euler(0, 0, theta * Mathf.Rad2Deg);
-			Sequence seq = DOTween.Sequence();
 			buttons [id].rectTransform.DOKill ();
+			Sequence seq = DOTween.Sequence();
 			seq.SetDelay((float)i / 10f);
-			seq.Append (buttons[id].rectTransform.DOAnchorPos (new Vector2(Mathf.Cos(theta) * r * 1.3f, Mathf.Sin(theta) * r * 1.3f), QUESTION_MOVE_TIME, true));
-			seq.Append (buttons[id].rectTransform.DOAnchorPos (new Vector2(Mathf.Cos(theta) * r * 0.9f, Mathf.Sin(theta) * r * 0.9f), QUESTION_MOVE_TIME, true));
-			seq.Append (buttons[id].rectTransform.DOAnchorPos (new Vector2(Mathf.Cos(theta) * r, Mathf.Sin(theta) * r), QUESTION_MOVE_TIME, true));
+			seq.Append (buttons[id].rectTransform.DOAnchorPos (new Vector2(Mathf.Cos(theta) * r * 1.3f, Mathf.Sin(theta) * r * 1.3f), QUESTION_MOVE_TIME, true).OnKill(()=>seq.Kill()));
+			seq.Append (buttons[id].rectTransform.DOAnchorPos (new Vector2(Mathf.Cos(theta) * r * 0.9f, Mathf.Sin(theta) * r * 0.9f), QUESTION_MOVE_TIME, true).OnKill(()=>seq.Kill()));
+			seq.Append (buttons[id].rectTransform.DOAnchorPos (new Vector2(Mathf.Cos(theta) * r, Mathf.Sin(theta) * r), QUESTION_MOVE_TIME, true).OnKill(()=>seq.Kill()));
 		}
 	}
 	public void HideQuestions(){
 		foreach(ButtonNode buttonNode in buttons){
+			buttonNode.rectTransform.DOKill ();
+			buttonNode.button.enabled = false;
 			buttonNode.rectTransform.DOAnchorPos (new Vector2(350, 0), QUESTION_MOVE_TIME
 			).OnComplete(
 				() => {
@@ -124,6 +126,7 @@ public class StageView : SingletonMonoBehaviour<StageView> {
 				}
 			);
 		}
+		HideMessage ();
 		/*StartQuestionButtonの処理*/
 		MainButton.DOAnchorPos (new Vector2(92,0), QUESTION_MOVE_TIME).OnComplete(()=>{isShowQuestions = false;});
 
@@ -173,6 +176,7 @@ public class StageView : SingletonMonoBehaviour<StageView> {
 		//押されていないボタンの処理
 		foreach(ButtonNode buttonNode in buttons){
 			if (bNode != buttonNode) {
+				buttonNode.rectTransform.DOKill ();
 				buttonNode.rectTransform.DOAnchorPos (new Vector2(350, 0), QUESTION_MOVE_TIME
 				).OnComplete(
 					() => {

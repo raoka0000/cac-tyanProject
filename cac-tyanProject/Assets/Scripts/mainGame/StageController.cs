@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public enum StateType{
 	idle = 1<<0,
@@ -9,7 +10,7 @@ public enum StateType{
 	showRestButton = 1<<3,
 	resting = 1<<4,
 	end = 1<<4,
-	idle2 = 1<<5
+	idle2 = 1<<5,
 }
 
 
@@ -244,6 +245,29 @@ public class StageController : SingletonMonoBehaviour<StageController> {
 			BitUtil.Loss (ref state, (int)StateType.showRestButton);
 			modelProxy.model.tapBodyMotionGroupName = LAppDefine.MOTION_GROUP_TAP_BODY;
 		}
+	}
+
+	public void ShakeEvent(){
+		if (BitUtil.Exist (state, (int)StateType.talking)) return;
+		if (BitUtil.Exist (state, (int)StateType.showRestButton)) return;
+		StageView.instance.HideQuestions ();
+		BitUtil.Add (ref state, (int)StateType.showRestButton);
+		Vector3 initPosison = modelProxy.transform.position;
+		Sequence seq = DOTween.Sequence ();
+		modelProxy.model.StartMotion ("shake", 0, LAppDefine.PRIORITY_FORCE);
+		seq.PrependInterval(1.6f);
+		seq.Append (modelProxy.transform.DOMoveY(-25,1.5f).SetEase(Ease.InOutQuart));
+		seq.Append (modelProxy.transform.DOScale (new Vector3 (1.6f, 1.6f, 1.6f), 2));
+		seq.Append (modelProxy.transform.DOMoveX(0,0.1f));
+		seq.Append (modelProxy.transform.DOMove (new Vector2 (0, -2), 1).OnComplete(()=>{
+			modelProxy.model.StartMotion ("shake", 1, LAppDefine.PRIORITY_FORCE);
+		}));
+		seq.AppendInterval (4f);
+		seq.Append (modelProxy.transform.DOMove (new Vector2 (0, -25), 0.8f).SetEase(Ease.InOutQuart));
+		seq.Append (modelProxy.transform.DOScale (new Vector3 (1, 1, 1), 1));
+		seq.Append (modelProxy.transform.DOMoveX(initPosison.x,0.1f));
+		seq.Append (modelProxy.transform.DOMove (initPosison, 1).OnComplete(()=>BitUtil.Loss (ref state, (int)StateType.showRestButton)));
+
 	}
 
 	public void DoRest(){
